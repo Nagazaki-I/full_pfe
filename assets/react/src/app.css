@@ -1,0 +1,16 @@
+.carousel .control-dots .dot {
+  /* background: #000; */
+  background: #131921;
+  box-shadow: none;
+  border-radius: 0%;
+  width: 24px;
+  height: 6px;
+  margin: 0 10px;
+  margin-bottom:15%;
+}
+
+@media (max-width: 1000px) {
+  .control-dots {
+    display: none;
+  }
+}
