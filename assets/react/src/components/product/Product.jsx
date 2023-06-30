@@ -8,6 +8,7 @@ import currency from "currency.js";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/slices/cartSlice";
 import { async } from "regenerator-runtime";
+import axios from "axios";
 
 
 
@@ -44,7 +45,7 @@ const Product = ({ id, title, price, description, category, image }) => {       
             {/* Category: */}
             <p className="absolute top-1 right-2 text-xs italic text-gray-400">{category.charAt(0).toUpperCase() + category.slice(1)}</p>
             {/* add to wish list: */}
-            <FavoriteBorderIcon onClick={() => console.log("")} className="absolute top-1 left-2 text-gray-900 cursor-pointer"/>
+            <FavoriteBorderIcon onClick={addToWishList} className="absolute top-1 left-2 text-gray-900 cursor-pointer"/>
             {/* Image: */}
             <div className="flex justify-center">
                 <img className='w-52 h-52 object-contain' src={image} /> {/*It was props. image*/}

@@ -30,3 +30,11 @@ services:
             - '%env(resolve:MONGO_DATABASE)%'
 
     MongoDB\Client: '@mongodb.client'
+
+
+
+    # Register the SessionMiddleware service
+    App\Middleware\SessionMiddleware:
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+            - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
