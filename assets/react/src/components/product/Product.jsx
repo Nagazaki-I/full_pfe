@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/slices/cartSlice";
 import { async } from "regenerator-runtime";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -19,6 +20,7 @@ const Product = ({ id, title, price, description, category, image }) => {       
     const [rating] = useState(Math.floor(Math.random() * (max - min + 1) + min))
     const [hasFreeShipping] = useState(Math.random() < 0.5)
     // console.log(rating);
+    const navigate = useNavigate()
     const dispatch = useDispatch()
     const handleAddtoCart = () => dispatch(addToCart({ id, title, price, description, category, image, rating, quantity: 1 }))
 
@@ -33,8 +35,11 @@ const Product = ({ id, title, price, description, category, image }) => {       
 			const data = response.data
             console.log(data)
             
-		} catch (error) {
-			console.error(error);
+		} catch (AxiosError){
+			// console.error();
+			if (AxiosError.response.data === "Invalid session") {
+                navigate("/login")
+            }
 		}
     }
 

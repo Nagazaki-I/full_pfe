@@ -7,8 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
-
-
+use TypeError;
 
 class SessionMiddleware
 {
@@ -28,17 +27,20 @@ class SessionMiddleware
 
         if ($request->get("_route") == "app_addToWishList") {
             // Get the session id from the request:
-            $browerSession = $request->cookies->get('usrSession');
+            $browerSession = $request->cookies->get('PHPSESSID');
             
             if (!$this->isValidSession($browerSession)) {
-                // Handle the invalid session case, e.g., return an error response
                 $response = new Response('Invalid session', 403);
-                $event->setResponse($response);
-            }else{
-                $response = new Response('Session is valid');
                 $event->setResponse($response);
             }
         }
+        // elseif (($request->get("_route") == "app_addToWishList")) {
+        //     $sessionId = $request->cookies->get("PHPSESSID");
+
+        //     $this->session->setId($sessionId);
+        //     // $user = $this->session->get("")
+        //     dd($this->session);
+        // }   
     }
 
     public function onKernelResponse(ResponseEvent $event)
@@ -48,9 +50,13 @@ class SessionMiddleware
 
     public function isValidSession($sessionId)
     {
-        // Check if the session ID exists in the server-side storage
-        $this->session->setId($sessionId);
-        $this->session->start();
+        // Check if the session ID exists in the server-side storage.
+        try {
+            $this->session->setId($sessionId);
+            $this->session->start();
+        } catch (TypeError $typeErr) {
+            return false;
+        }
 
         if ($this->session->isStarted()) {
             return true;

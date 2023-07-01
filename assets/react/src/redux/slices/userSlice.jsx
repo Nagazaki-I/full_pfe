@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
+import axios from "axios"
 
 
 const user = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : null
@@ -17,6 +18,7 @@ export const userSlice = createSlice({
       state.userInfo = action.payload
     },
     logoutUser: (state) => {
+      axios.get("/api/logout")
       state.userInfo = null
       localStorage.clear() // or   localStorage.removeItem('user');
     },

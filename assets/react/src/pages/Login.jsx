@@ -86,7 +86,7 @@ const Login = () => {
 				// ------------Redirect --------
 				setTimeout(() => {
 					navigate("/");
-				}, 1500);
+				}, 1000);
 			})
 			.catch((error) => {
 				setLoading(false);

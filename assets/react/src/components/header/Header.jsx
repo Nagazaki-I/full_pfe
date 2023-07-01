@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { motion } from "framer-motion"
 import { getAuth, signOut } from "firebase/auth";
 import { logoutUser } from '../../redux/slices/userSlice'
+import axios from 'axios'
 
 
 
@@ -26,8 +27,8 @@ const Header = () => {
 
   const auth = getAuth();
   const handleLogout = () => signOut(auth).then(() => {
-    dispatch(logoutUser());
     location.reload()
+    dispatch(logoutUser());
   }).catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
