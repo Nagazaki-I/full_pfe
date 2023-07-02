@@ -3,9 +3,11 @@ import Footer from './components/footer/Footer'
 import Header from './components/header/Header'
 import Home from './pages/Home'
 import productsData from './api/productsAPI'
+import userWishlist from './api/wishlistAPI'
 import Login from './pages/Login'
 import Cart from './pages/Cart'
 import Register from './pages/Register'
+import Wishlist from './pages/Wishlist'
 import Checkout from './pages/Checkout'
 
 import { createBrowserRouter, createRoutesFromElements, Outlet, Route, RouterProvider, ScrollRestoration } from 'react-router-dom'
@@ -35,6 +37,7 @@ function App() {
         </Route>
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
+        <Route path='/wishlist' element={<Wishlist />} loader={userWishlist} />
         <Route path='/checkout' element={<Checkout />} />
       </Route>
     )

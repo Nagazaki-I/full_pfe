@@ -34,7 +34,7 @@ class SessionMiddleware
                 $event->setResponse($response);
             }
         }
-        // elseif (($request->get("_route") == "app_addToWishList")) {
+        // elseif (($request->get("_route") == "app_getWishList")) {
         //     $sessionId = $request->cookies->get("PHPSESSID");
 
         //     $this->session->setId($sessionId);

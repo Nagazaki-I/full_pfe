@@ -118,7 +118,12 @@ const Header = () => {
                         <p className='text-center font-semibold'>{userInfo.name}</p>
                         <p className='text-center text-sm'>{userInfo.email}</p>
                       </div>
-                      <button className="w-full mt-5 px-4 py-2 text-black transition-colors duration-200 rounded-md bg-red-500 hover:bg-red-600 active:outline-none active:bg-red-700" onClick={handleLogout}>Sign out</button>
+                      <div className='w-full flex items-center justify-center gap-2'>
+                      <Link to="/wishlist" className='w-full'>
+                        <button className="w-full mt-5 px-4 py-2 text-black transition-colors duration-200 rounded-md bg-green-500 hover:bg-green-600 active:outline-none active:bg-green-700">Wishlist</button>
+                      </Link>
+                        <button className="w-full mt-5 px-4 py-2 text-black transition-colors duration-200 rounded-md bg-red-500 hover:bg-red-600 active:outline-none active:bg-red-700" onClick={handleLogout}>Sign out</button>
+                      </div>
                     </div>
                   </motion.div>
               }
