@@ -84,25 +84,3 @@ const Cart = () => {
 }
 
 export default Cart
-
-
-// {cartItems.map(item =>
-//     <div id={item.id} className="w-48 flex flex-col outline outline-1">
-//         <p>{item.category}</p>
-
-//         <div>
-//             <img className="w-[150px]" src={item.image} />
-//         </div>
-
-//         <h4>{item.title}</h4>
-
-//         <p className='line-clamp-2'>{item.description}</p>
-
-//         <p>{item.quantity}</p>
-
-//         <div>
-//             {currency(item.price).format()}
-//             {/* {`$${price}`} */}
-//         </div>
-//     </div>
-// )}

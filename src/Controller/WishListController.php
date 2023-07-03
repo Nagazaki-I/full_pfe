@@ -60,7 +60,7 @@ class WishListController extends AbstractController
         // $userDoc = $Collection->findOne(['userId' => $user["uid"]]);
         $collection->findOneAndUpdate(
             ['userId' => $user["uid"]],
-            ['$push' => ['wishList' => $product]]
+            ['$addToSet' => ['wishList' => $product]] // `addToSet` to avoid duplicates and push to allow them.
         );
 
         // $collection = $this->mongoClient->selectCollection("store", "userWishlist");
@@ -76,6 +76,7 @@ class WishListController extends AbstractController
     public function removeFromWishList(Request $request): Response
     {
         $product = json_decode($request->getContent(), true);
+        $productId = $product["id"];
         $cookie = $request->cookies->get("PHPSESSID");
 
         $this->session->setId($cookie);
@@ -87,7 +88,7 @@ class WishListController extends AbstractController
         // $userDoc = $Collection->findOne(['userId' => $user["uid"]]);
         $collection->findOneAndUpdate(
             ['userId' => $user["uid"]],
-            ['$pull' => ['wishList' => $product]]
+            ['$pull' => ['wishList' => ['id' => $productId]]]
         );
 
         // $collection = $this->mongoClient->selectCollection("store", "userWishlist");

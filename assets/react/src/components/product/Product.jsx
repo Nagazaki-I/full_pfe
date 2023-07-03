@@ -27,7 +27,7 @@ const Product = ({ id, title, price, description, category, image }) => {       
 
     const addToWishList = async () => {
         try {
-			const response = await axios.post("/api/addToWishList", JSON.stringify({"id":id}), {
+			const response = await axios.post("/api/addToWishList", JSON.stringify({"id":id, "title":title, "price":price, "description":description, "category":category, "image":image, "rating":rating}), {
 				headers: {
 					"Content-Type": "application/json",
 				}

@@ -34,10 +34,10 @@ function App() {
         <Route path='/' element={<Layout />}>
           <Route index element={<Home />} loader={productsData} />
           <Route path='/cart' element={<Cart />} />
+          <Route path='/wishlist' element={<Wishlist />} loader={userWishlist} />
         </Route>
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
-        <Route path='/wishlist' element={<Wishlist />} loader={userWishlist} />
         <Route path='/checkout' element={<Checkout />} />
       </Route>
     )
