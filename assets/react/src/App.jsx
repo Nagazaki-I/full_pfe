@@ -9,6 +9,9 @@ import Cart from './pages/Cart'
 import Register from './pages/Register'
 import Wishlist from './pages/Wishlist'
 import Checkout from './pages/Checkout'
+import ProductDetail from './pages/ProductDetail'
+
+
 
 import { createBrowserRouter, createRoutesFromElements, Outlet, Route, RouterProvider, ScrollRestoration } from 'react-router-dom'
 
@@ -35,6 +38,9 @@ function App() {
           <Route index element={<Home />} loader={productsData} />
           <Route path='/cart' element={<Cart />} />
           <Route path='/wishlist' element={<Wishlist />} loader={userWishlist} />
+          <Route path='/product'>
+            <Route path=':id' element={<ProductDetail />} />
+          </Route>
         </Route>
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />

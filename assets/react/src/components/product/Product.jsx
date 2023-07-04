@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/slices/cartSlice";
 import { async } from "regenerator-runtime";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 
@@ -43,6 +43,9 @@ const Product = ({ id, title, price, description, category, image }) => {       
 		}
     }
 
+    // const handleViewDetails = () => {
+    //     window.open(`/product/${id}`, "_blank")
+    // }
 
 
     return (
@@ -76,7 +79,9 @@ const Product = ({ id, title, price, description, category, image }) => {       
                 {/* Buttons : ATC + Details: */}
                 <div className="flex gap-1">
                     <button className="w-full h-7 bg-yellow-400 rounded-md text-xs font-medium cursor-pointer hover:bg-yellow-500 active:bg-yellow-600" onClick={handleAddtoCart}>Add to Cart</button> {/*removed rounded-md */}
-                    <button className="w-[150px] h-7 border-[1px] rounded-md border-black text-xs font-medium cursor-pointer hover:bg-black hover:text-white active:text-white active:bg-gray-800 active:border-gray-800">View Details</button> {/*removed rounded-md */}
+                    <Link to={`/product/${id}`} className="w-[150px]">
+                        <button className="w-full h-7 border-[1px] rounded-md border-black text-xs font-medium cursor-pointer hover:bg-black hover:text-white active:text-white active:bg-gray-800 active:border-gray-800">View Details</button> {/*removed rounded-md */}
+                    </Link>
                 </div>
             </div>
         </div>

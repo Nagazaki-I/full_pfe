@@ -32,6 +32,7 @@ class ProductsApiController extends AbstractController
 
         // Setting up the filter
         $filter = [];
+        isset($params["id"]) ? $filter["id"] = intval($params["id"]) : null;
         isset($params["category"]) ? (is_string($params["category"]) && $params["category"] ? $filter["category"] = $params["category"] : null) : null;
         isset($params["rating"]) ? $filter["rating.rate"] = ['$gt' => floatval($params["rating"])] : null;
         isset($params["price"]) ? $filter["price"] = ['$gt' => floatval($params["price"])] : null;

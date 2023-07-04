@@ -3,6 +3,7 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import WishlistProduct from "../components/product/WishlistProduct";
 import { motion } from "framer-motion";
 import { emptyCart } from "../assets/assets";
+import { emptyWishlist } from "../assets/assets";
 import { Link } from "react-router-dom";
 
 const Wishlist = () => {
@@ -51,7 +52,7 @@ const Wishlist = () => {
 				<div className="w-full flex flex-col slg:flex-row items-center justify-center gap-10 slg:gap-20 lg:gap-52 mb-5 slg:my-10">
 					<motion.img
 						className="h-52"
-						src={emptyCart}
+						src={emptyWishlist}
 						initial={{ x: -100, opacity: 0 }}
 						animate={{ x: 0, opacity: 1 }}
 						transition={{ delay: 0.5, duration: 0.5 }}
@@ -63,11 +64,11 @@ const Wishlist = () => {
 						transition={{ delay: 0.5, duration: 0.5 }}
 					>
 						<h1 className="font-titleFont font-semibold text-lg">
-							Your Cart feels lonely
+							Your Wishlist is empty
 						</h1>
 						<p className="font-base text-sm text-center">
-							Your Shopping cart lives to serve. Give it purpose - fill it with
-							books, electronics, videos, etc. and make it happy
+						Empower your Wishlist with purpose by enriching it with 
+						books, electronics, videos, and more, to bring joy and satisfaction
 						</p>
 						<Link to="/">
 							<button className="w-[250px] h-8 px-5 text-sm bg-yellow-400 rounded-md font-medium cursor-pointer hover:bg-yellow-500 active:bg-yellow-600">

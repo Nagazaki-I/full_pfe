@@ -11,6 +11,8 @@ import emptyCart from "./emptyCart.png";
 import freeDelivery from "./freeDelivery.jpg";
 import advertizement from "./advertizement.jpg";
 import ProfileIcon from "./ProfileIcon.png"
+import emptyWishlist from "./emptyWishlist.webp"
+
 
 export {
   logo,
@@ -25,5 +27,6 @@ export {
   moroccanFlag,
   emptyCart,
   freeDelivery,
-  ProfileIcon
+  ProfileIcon,
+  emptyWishlist
 };
