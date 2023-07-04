@@ -1,12 +1,18 @@
 import React from 'react'
 import StarIcon from '@mui/icons-material/Star';
 import currency from 'currency.js';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../redux/slices/cartSlice';
 import axios from 'axios';
 
 
 
 
+
 const WishlistProduct = (props) => {
+
+    const dispatch = useDispatch()
+    const handleAddtoCart = () => dispatch(addToCart({ "id":props.id, "title":props.title, "price":props.price, "description":props.description, "category":props.category, "image":props.image, "rating":props.rating, quantity: 1 }))
 
     const removeItem = async () => {
         const response = await axios.post("/api/removeFromWishList", JSON.stringify({"id":props.id}), 
@@ -39,9 +45,12 @@ const WishlistProduct = (props) => {
                             <p className='px-2 bg-black text-white rounded-l-md py-1'>Price </p>
                             <p className='w-full text-base flex items-center justify-center bg-white inner-border-[1px] inner-border-black rounded-r-md px-1'>{currency(props.price).format()}</p>
                         </div>
+                        <button className='slg:hidden text-sm font-medium px-[5px] text-black bg-green-500 hover:bg-green-600 active:bg-green-700 rounded-md py-1' onClick={handleAddtoCart}>Add To Cart</button>
                         <button className='px-[5px] text-black bg-red-500 hover:bg-red-600 active:bg-red-700 rounded-md py-1' onClick={removeItem}>Remove item</button>
-                        
                     </div>
+                </div>
+                <div className='hidden slg:inline-flex slg:ml-0 lg:ml-[5rem]'>
+                    <button className='text-sm font-medium px-[5px] text-black bg-green-500 hover:bg-green-600 active:bg-green-700 rounded-md py-1' onClick={handleAddtoCart}>Add To Cart</button>
                 </div>
             </div>
         </div>

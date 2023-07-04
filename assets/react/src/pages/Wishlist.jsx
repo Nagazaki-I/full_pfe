@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import { emptyCart } from "../assets/assets";
 import { Link } from "react-router-dom";
 
-
 const Wishlist = () => {
 	const wishlist = useLoaderData();
 
@@ -24,37 +23,28 @@ const Wishlist = () => {
 						</div>
 						{/* Products */}
 						<div>
-							{wishlist.wishList.map(
-								({
-									id,
-									title,
-									price,
-									description,
-									category,
-									image,
-									rating,
-								}) => (
-									<WishlistProduct
-										key={id} // or key={item.id}
-										id={id}
-										title={title}
-										price={price}
-										description={description}
-										category={category}
-										image={image}
-										rating={rating}
-									/>
+							{wishlist.wishList.map(({id,title,price,description,category,image,rating}) => (
+								<WishlistProduct
+									key={id} // or key={item.id}
+									id={id}
+									title={title}
+									price={price}
+									description={description}
+									category={category}
+									image={image}
+									rating={rating}
+								/>
 								)
 							)}
 						</div>
 					</div>
-					{/* Checkout side */}
+					{/* Right side */}
 					<div className="col-span-1 xs:col-span-5 md:col-span-3 lg:col-span-3 crt:col-span-1 h-16  bg-white flex flex-col justify-between p-4 rounded-[5px]">
-              <Link to="/">
-                <button className="w-full h-8 px-2 text-sm font-semibold bg-yellow-400 rounded-md">
-                    Back To Home Page
-                </button>
-              </Link>
+						<Link to="/">
+							<button className="w-full h-8 px-2 text-sm font-semibold bg-yellow-400 rounded-md">
+								Back To Home Page
+							</button>
+						</Link>
 					</div>
 				</div>
 			) : (
