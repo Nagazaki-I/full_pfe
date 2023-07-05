@@ -57,7 +57,7 @@ const Header = () => {
 
         {/* ===================== Search ======================== */}
         <div className='h-8 rounded-md hidden mdl:flex flex-grow relative '>
-          <span onClick={() => setShowAll(!showAll)} className='w-14 h-full bg-gray-200 hover:bg-gray-300 border-2 cursor-pointer duration-300 text-sm text-amazon_blue font-titleFont flex items-center justify-center rounded-tl-md rounded-bl-md'>
+          {/* <span onClick={() => setShowAll(!showAll)} className='w-14 h-full bg-gray-200 hover:bg-gray-300 border-2 cursor-pointer duration-300 text-sm text-amazon_blue font-titleFont flex items-center justify-center rounded-tl-md rounded-bl-md'>
             All 
             <ArrowDropDownOutlinedIcon />
           </span>
@@ -71,8 +71,8 @@ const Header = () => {
                 </ul>
               </div>
             )
-          }
-          <input className='h-full text-base text-amazon_blue flex-grow outline-none border-none px-2' type="text" name="" />
+          } */}
+          <input className='h-full text-base text-amazon_blue flex-grow outline-none border-none px-2 rounded-l-md' type="text" name="" />
           <span className='w-12 h-full flex items-center justify-center bg-amazon_yellow hover:bg-[#f3a847] duration-300 text-amazon_blue cursor-pointer rounded-tr-md rounded-br-md'>
             <SearchIcon />
           </span>

@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addToCart } from "../redux/slices/cartSlice";
-import currency from 'currency.js';
+// import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
+// import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+// import currency from 'currency.js';
 import axios from 'axios';
 
 
@@ -10,6 +12,9 @@ const ProductDetail = () => {
     const { id } = useParams();
     // console.log(params);
 
+    const min = 1
+    const max = 5
+    const [rating] = useState(Math.floor(Math.random() * (max - min + 1) + min))
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [product, setProduct] = useState({});
@@ -29,57 +34,59 @@ const ProductDetail = () => {
     }, [id]);
 
     const handleAddToCart = () => {
-        dispatch(addToCart({id: product.id,title: product.title,description: product.description,price: product.price,category: product.category,image: product.image,quantity: 1,}));
+        dispatch(addToCart({id:product.id, title:product.title, price:product.price, description:product.description, category:product.category, image:product.image, rating:rating, quantity: 1}))
     };
 
-    const handleBuyNow = () => {
-        handleAddToCart();
-        navigate('/cart');
-    };
+    // const handleAddToWishlist = () => {
+    //     addToCart({id:product.id, title:product.title, price:product.price, description:product.description, category:product.category, image:product.image, rating:rating} )
+    // };
+
+    const addToWishList = async () => {
+        try {
+			const response = await axios.post("/api/addToWishList", JSON.stringify({"id":product.id, "title":product.title, "price":product.price, "description":product.description, "category":product.category, "image":product.image, "rating":rating}), {
+				headers: {
+					"Content-Type": "application/json",
+				}
+			});
+			const data = response.data
+            console.log(data)
+            
+		} catch (AxiosError){
+			// console.error();
+			if (AxiosError.response.data === "Invalid session") {
+                navigate("/login")
+            }
+		}
+    }
 
     // if (Object.keys(product).length === 0) {
     //     return <div>Loading...</div>;
     // }
 
-    return (
+    return (        
         <section className="text-gray-600 body-font overflow-hidden">
-            <div className="container px-5 py-24 mx-auto">
-                <div className="lg:w-4/5 mx-auto flex flex-wrap">
-                    <img alt={product.title} className="lg:w-1/2 w-full lg:h-auto max-h-[600px] h-64 object-contain object-center rounded" src={product.image}/>
-                    <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
-                        <h2 className="text-sm title-font text-gray-500 tracking-widest uppercase">
-                            {product.category}
-                        </h2>
-                        <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">
-                            {product.title}
-                        </h1>
-                        <div className="flex mb-4">
-                            {/* Rating */}
+            <div className="max-w-screen-xl mx-auto px-2 py-2 md:py-10">
+                <div className="w-full grid lg:grid-cols-3 grid-cols-1 gap-2 bg-gray-100 rounded-lg justify-center">
+                    <div className="flex items-center justify-center bg-white rounded-lg relative group overflow-hidden">
+                        <img alt="product image" loading="lazy" width="500" height="500" decoding="async" src={product.image} />
+                    </div>
+                    <div className="col-span-2 flex flex-col gap-3 justify-center items-center p-2 md:p-4">
+                        <div className="flex flex-col gap-3">
+                            <p className="text-xs md:text-sm text-amazon_blue font-semibold -mb-3">{product.category}</p>
+                            <h1 className="text-lg md:text-2xl tracking-wide font-semibold">{product.title}</h1>
+                            <p className="text-sm md:text-base text-gray-600">{product.description}</p>
+                            <p className="text-base text-gray flex items-center gap-1">Price: <span className="text-amazon_blue text-1g font-semibold">${product.price}</span></p>
                         </div>
-                        <p className="leading-relaxed">{product.description}</p>
-                        <div className="flex mt-6 items-center pb-5 border-b-2 border-gray-200 mb-5">
-                            {/* Size */}
-                        </div>
-                        <div className="flex">
-                            <span className="title-font font-medium text-2xl text-gray-900">
-                                {currency(product.price).format()}
-                            </span>
-                            <button onClick={handleAddToCart} className="flex ml-auto rounded-md mt-3 font-titleFont font-medium text-base bg-yellow-500 border-0 py-2 px-6 focus:outline-none bg-gradient-to-tr from-yellow-400 to-yellow-200 border-yellow-500 hover:border-yellow-700 hover:from-yellow-300 to hover:to-yellow-400 active:bg-gradient-to-bl active:from-yellow-400 active:to-yellow-500 duration-200">Add to Cart</button>
+                        <div className='w-full flex justify-between'>
+                            <button onClick={handleAddToCart} className="w-full md:w-96 mr-2 h-12 bg-amazon_blue text-gray-200 hover:bg-amazon_yellow hover:text-amazon_blue duration-300 rounded-lg mt-5 text-base font-semibold">Add To Cart</button>
+                            <button onClick={addToWishList} className="w-full md:w-96 ml-2 h-12 bg-amazon_blue text-gray-200 hover:bg-red-400 hover:text-amazon_blue duration-300 rounded-lg mt-5 text-base font-semibold">Add To Wishlist</button>
                         </div>
                     </div>
+
                 </div>
             </div>
         </section>
-        // <div className="text-gray-600">
-        //     <div className='grid grid-cols-2 place-items-center'>
-        //         <div className='w-full col-span-1 bg-white'>
-        //             <img src={product.image} alt={product.title} />
-        //         </div>
-        //         <div className='col-span-1'>
-        //             hello
-        //         </div>
-        //     </div>
-        // </div>
+
     );
 };
 
