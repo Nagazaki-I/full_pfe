@@ -8,8 +8,8 @@ import Login from './pages/Login'
 import Cart from './pages/Cart'
 import Register from './pages/Register'
 import Wishlist from './pages/Wishlist'
-import Checkout from './pages/Checkout'
 import ProductDetail from './pages/ProductDetail'
+import SuccessPage from './pages/Success'
 
 
 
@@ -41,10 +41,10 @@ function App() {
           <Route path='/product'>
             <Route path=':id' element={<ProductDetail />} />
           </Route>
+          <Route path='/success' element={<SuccessPage />} />
         </Route>
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
-        <Route path='/checkout' element={<Checkout />} />
       </Route>
     )
   )

@@ -7,14 +7,41 @@ import { clearCart } from '../redux/slices/cartSlice'
 import { motion } from "framer-motion"
 import { emptyCart } from "../assets/assets"
 import { Link } from "react-router-dom"
+import { loadStripe } from "@stripe/stripe-js";
+import axios from 'axios'
 
 
 
 const Cart = () => {
     const cartItems = useSelector(state => state.cart.items)
     const dispatch = useDispatch()
+    const user = JSON.parse(localStorage.getItem("user"))
 
     const total = cartItems.reduce((total, item) => total += (item.price * item.quantity), 0)
+
+
+    const stripePubKey = "pk_test_51NQbeaHlEtr8FNYn2BENaqnZ2PrMAiKYrajSojfciNcZSisEj3Uuazk62jvnH854LeJ6ZuK9Y3lmFEIQN2oJ8jE700TFbppcvm"
+    // stripeSecretKey="sk_test_51NQbeaHlEtr8FNYnqPBDK4tErgH5jWfTespND74rlaKirAkkH9uxf2lO6u6V1wWNwHbVZ0ov0Z5q7VXFHXYHBRYs0002R0yns0"
+
+    const stripePromise = loadStripe(stripePubKey)
+
+    const createCheckoutSession = async () => {
+        const stripe = await stripePromise
+        //call the backend:
+        const checkoutSessionId = await axios.post("/api/create-checkout-session",JSON.stringify({items: cartItems, email: user.email}),
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                }
+            }
+        )
+        console.log(checkoutSessionId);
+        const result = await stripe.redirectToCheckout({sessionId: checkoutSessionId.data.sessionId})
+
+        if (result.error) alert(result.error.message)
+    }
+
+    // createCheckoutSession();
 
     return (
         <div className='w-full p-4'>
@@ -62,7 +89,7 @@ const Cart = () => {
                                 <p className='flex justify-between text-md font-semibold px-1'>
                                     Total price : <span>{currency(total).format()}</span>
                                 </p>
-                                <button className='h-8 px-2 text-sm font-semibold bg-yellow-400 rounded-md'>Proceed to Checkout</button>
+                                <button className='h-8 px-2 text-sm font-semibold bg-yellow-400 rounded-md' onClick={createCheckoutSession}>Proceed to Checkout</button>
                             </div>
                         </div>
                     </div>) : (

@@ -37,10 +37,6 @@ const ProductDetail = () => {
         dispatch(addToCart({id:product.id, title:product.title, price:product.price, description:product.description, category:product.category, image:product.image, rating:rating, quantity: 1}))
     };
 
-    // const handleAddToWishlist = () => {
-    //     addToCart({id:product.id, title:product.title, price:product.price, description:product.description, category:product.category, image:product.image, rating:rating} )
-    // };
-
     const addToWishList = async () => {
         try {
 			const response = await axios.post("/api/addToWishList", JSON.stringify({"id":product.id, "title":product.title, "price":product.price, "description":product.description, "category":product.category, "image":product.image, "rating":rating}), {
@@ -72,14 +68,14 @@ const ProductDetail = () => {
                     </div>
                     <div className="col-span-2 flex flex-col gap-3 justify-center items-center p-2 md:p-4">
                         <div className="flex flex-col gap-3">
-                            <p className="text-xs md:text-sm text-amazon_blue font-semibold -mb-3">{product.category}</p>
+                            <p className="text-xs md:text-sm text-amazon_blue font-semibold">{product.category}</p>
                             <h1 className="text-lg md:text-2xl tracking-wide font-semibold">{product.title}</h1>
                             <p className="text-sm md:text-base text-gray-600">{product.description}</p>
                             <p className="text-base text-gray flex items-center gap-1">Price: <span className="text-amazon_blue text-1g font-semibold">${product.price}</span></p>
                         </div>
                         <div className='w-full flex justify-between'>
                             <button onClick={handleAddToCart} className="w-full md:w-96 mr-2 h-12 bg-amazon_blue text-gray-200 hover:bg-amazon_yellow hover:text-amazon_blue duration-300 rounded-lg mt-5 text-base font-semibold">Add To Cart</button>
-                            <button onClick={addToWishList} className="w-full md:w-96 ml-2 h-12 bg-amazon_blue text-gray-200 hover:bg-red-400 hover:text-amazon_blue duration-300 rounded-lg mt-5 text-base font-semibold">Add To Wishlist</button>
+                            <button onClick={addToWishList} className="w-full md:w-96 ml-2 h-12 bg-amazon_blue text-gray-200 hover:bg-green-500 hover:text-amazon_blue duration-300 rounded-lg mt-5 text-base font-semibold">Add To Wishlist</button>
                         </div>
                     </div>
 
