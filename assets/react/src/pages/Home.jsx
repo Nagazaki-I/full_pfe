@@ -22,7 +22,7 @@ function Home({category}) {
     fetchProductsData(category)
   }, [category])
 
-  console.log(productsData);
+  // console.log(productsData);
 
   return (
     <div>

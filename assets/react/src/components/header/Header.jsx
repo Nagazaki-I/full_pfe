@@ -1,4 +1,4 @@
-import React, { useState, useNavigate, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import LocationOnOutlined from '@mui/icons-material/LocationOnOutlined'
 import ArrowDropDownOutlinedIcon from '@mui/icons-material/ArrowDropDownOutlined'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
@@ -27,8 +27,8 @@ const Header = ({handleCategorySelection}) => {
 
   const auth = getAuth();
   const handleLogout = () => signOut(auth).then(() => {
-    location.reload()
     dispatch(logoutUser());
+    window.location.replace("/")
   }).catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
