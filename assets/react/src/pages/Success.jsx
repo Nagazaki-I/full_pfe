@@ -11,7 +11,7 @@ const SuccessPage = () => {
 
   
   return (
-    <div className="flex flex-col gap-2 items-center justify-center py-20">
+    <div className="h-full min-h-[411px] flex flex-col gap-2 items-center justify-center py-20">
       <h1 className="text-2xl text-hoverBg font-semibold">
         Thank you for shopping in LICDA Store
       </h1>

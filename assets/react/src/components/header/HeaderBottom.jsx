@@ -8,7 +8,7 @@ import {motion} from "framer-motion"
 
 
 
-const HeaderBottom = () => {
+const HeaderBottom = ({handleCategorySelection}) => {
     const [sideBar, setSideBar] = useState(false)
     const ref = useRef()
 
@@ -24,13 +24,13 @@ const HeaderBottom = () => {
     return (
         <div className='w-full px-4 h-[36px] bg-amazon_light text-white flex items-center '>
             {/* ===================== ItemsList starts here ========================== */}
-            <ul className='flex items-center gap-1 text-sm tracking-wide'>
+            <ul className='flex items-center mdl:gap-1 text-xs tracking-wide mdl:text-sm'>
                 <li onClick={() => setSideBar(true)} className="headerHover flex items-center gap-1"><MenuIcon />All</li> {/*I don't know if the 'flex items-center' here have any effect*/}
-                <li className="headerHover hidden md:inline-flex">Today's Deals</li>
-                <li className="headerHover hidden md:inline-flex">Customer Service</li>
-                <li className="headerHover hidden md:inline-flex">Gift Cards</li>
-                <li className="headerHover hidden md:inline-flex">Registry</li>
-                <li className="headerHover hidden md:inline-flex">Sell</li>
+                <li className="headerHover hidden md:inline-flex" onClick={() => handleCategorySelection("jewelery")}>Jewelery</li>
+                <li className="headerHover hidden md:inline-flex" onClick={() => handleCategorySelection("toys")}>Toys</li>
+                <li className="headerHover hidden md:inline-flex" onClick={() => handleCategorySelection("sports and outdoors")}>Sports and Outdoors</li>
+                <li className="headerHover hidden md:inline-flex" onClick={() => handleCategorySelection("vitamins and supplements")}>Vitamins and Supplements</li>
+                <li className="headerHover hidden md:inline-flex" onClick={() => handleCategorySelection("fragrances")}>Fragrances</li>
             </ul>
             {/* ===================== ItemsList End here ========================== */}
             {/* ===================== sideNav starts here ========================== */}

@@ -49,7 +49,7 @@ const Wishlist = () => {
 					</div>
 				</div>
 			) : (
-				<div className="w-full flex flex-col slg:flex-row items-center justify-center gap-10 slg:gap-20 lg:gap-52 mb-5 slg:my-10">
+				<div className="min-h-[299px] w-full flex flex-col slg:flex-row items-center justify-center gap-10 slg:gap-20 lg:gap-52 mb-5 slg:my-10">
 					<motion.img
 						className="h-52"
 						src={emptyWishlist}

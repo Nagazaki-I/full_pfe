@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Footer from './components/footer/Footer'
 import Header from './components/header/Header'
 import Home from './pages/Home'
@@ -16,10 +16,10 @@ import SuccessPage from './pages/Success'
 import { createBrowserRouter, createRoutesFromElements, Outlet, Route, RouterProvider, ScrollRestoration } from 'react-router-dom'
 
 
-const Layout = () => {
+const Layout = ({handleCategorySelection}) => {
   return (
     <div>
-      <Header />
+      <Header handleCategorySelection={handleCategorySelection}/>
       <ScrollRestoration />
       <Outlet />
       <Footer />
@@ -31,11 +31,19 @@ const Layout = () => {
 
 
 function App() {
+  const [selectedCategory, setSelectedCategory] = useState('')
+  console.log(selectedCategory);
+
+  const handleCategorySelection = (category) => {
+    setSelectedCategory(category);
+  };
+
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route>
-        <Route path='/' element={<Layout />}>
-          <Route index element={<Home />} loader={productsData} />
+        <Route path='/' element={<Layout handleCategorySelection={handleCategorySelection}/>}>
+          {/* <Route index element={<Home />} loader={productsData(selectedCategory)} /> */}
+          <Route index element={<Home category={selectedCategory}/>} />
           <Route path='/cart' element={<Cart />} />
           <Route path='/wishlist' element={<Wishlist />} loader={userWishlist} />
           <Route path='/product'>

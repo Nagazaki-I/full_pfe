@@ -1,15 +1,28 @@
-import React, { createContext } from 'react'
+import React, { createContext, useEffect, useState } from 'react'
 import Banner from '../components/home/Banner'
 import ProductFeed from '../components/home/ProductFeed'
 import { useLoaderData } from "react-router-dom"
+import axios from 'axios';
 
 
 export const ProductsDataContext = createContext();
 
-function Home() {
-  // Added this instead of using useLoaderData() within the Products.jsx component. (I deconstructured the object and gave an alias to the data element)
-  const { data: productsData } = useLoaderData() 
+function Home({category}) {
+  // Added this instead of using useLoaderData() within the Products.jsx component. (I deconstructured the object and gave `data` an alias)
+  // const { data: productsData } = useLoaderData() 
+  const [productsData, setProductsData] = useState([])
+  // console.log(category);
 
+  useEffect(()=>{
+    const fetchProductsData = async (category) => {
+      const data = await axios.get(`/api/products?category=${category}`).then(response => response.data)
+      // console.log(data.data);
+      setProductsData(data.data)
+    }
+    fetchProductsData(category)
+  }, [category])
+
+  console.log(productsData);
 
   return (
     <div>

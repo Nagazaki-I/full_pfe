@@ -16,7 +16,7 @@ import axios from 'axios'
 
 
 
-const Header = () => {
+const Header = ({handleCategorySelection}) => {
   const [showAll, setShowAll] = useState(false)
   const [showProfil, setShowProfil] = useState(false)
 
@@ -205,7 +205,7 @@ const Header = () => {
 
       </div>
       <div className=''> {/*this needs to be fixed for mobile */}
-        <HeaderBottom />
+        <HeaderBottom handleCategorySelection={handleCategorySelection}/>
       </div>
     </div>
   )

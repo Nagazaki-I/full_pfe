@@ -94,7 +94,7 @@ const Cart = () => {
                         </div>
                     </div>) : (
 
-                    <div className='w-full flex flex-col slg:flex-row items-center justify-center gap-10 slg:gap-20 lg:gap-52 mb-5 slg:my-10'>
+                    <div className='min-h-[299px] w-full flex flex-col slg:flex-row items-center justify-center gap-10 slg:gap-20 lg:gap-52 mb-5 slg:my-10'>
                         <motion.img className='h-52' src={emptyCart} initial={{ x:-100, opacity: 0  }} animate={{ x:0, opacity: 1  }} transition={{ delay: 0.5, duration: 0.5 }}/>
                         <motion.div className='w-[350px] flex flex-col items-center justify-center bg-white p-4 pb-5 rounded-[5px] gap-3' initial={{ x:100, opacity: 0  }} animate={{ x:0, opacity: 1  }} transition={{ delay: 0.5, duration: 0.5 }}>
                             <h1 className='font-titleFont font-semibold text-lg'>Your Cart feels lonely</h1>
