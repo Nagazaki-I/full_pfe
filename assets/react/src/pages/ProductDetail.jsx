@@ -24,7 +24,7 @@ const ProductDetail = () => {
             try {
                 const response = await axios(`http://localhost:8000/api/products?id=${id}`).then(res => res.data);
                 const productData = response.data[0];
-                // console.log(productData);
+                console.log(productData);
                 setProduct(productData);
             } catch (error) {
                 console.log(error);

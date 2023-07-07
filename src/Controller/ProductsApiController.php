@@ -85,7 +85,7 @@ class ProductsApiController extends AbstractController
                 "price" =>  $doc["price"],
                 "description"  =>  $doc["description"],
                 "category" =>  $doc["category"],
-                "image" =>  $doc["imagePath"],
+                "image" =>  $doc["image"], // change this back to imagePath to use the local images
                 "rating" =>  $doc["rating"]["rate"],
                 "reviewCount" =>  $doc["rating"]["count"]
             ];

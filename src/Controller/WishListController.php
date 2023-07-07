@@ -53,13 +53,23 @@ class WishListController extends AbstractController
 
         $this->session->setId($cookie);
         $this->session->start();
-        $user = $this->session->get('userObject');
+        $userObject = $this->session->get('userObject');
+        // dd($userObject);
 
-        // This gets all the documents in the collection
         $collection = $this->mongoClient->selectCollection("store", "userWishlist");
+        
+        $user = $collection->findOne(['userId' => $userObject["uid"]]);
+        
+        // // dd($user);
+        if (!$user) {
+            $newUser = ["userId" => $userObject["uid"], "wishList" => []];
+            $collection->insertOne($newUser);
+            $user = $newUser;
+        }
+
         // $userDoc = $Collection->findOne(['userId' => $user["uid"]]);
         $collection->findOneAndUpdate(
-            ['userId' => $user["uid"]],
+            ['userId' => $userObject["uid"]],
             ['$addToSet' => ['wishList' => $product]] // `addToSet` to avoid duplicates and push to allow them.
         );
 
@@ -67,8 +77,6 @@ class WishListController extends AbstractController
         // dd($collection);
         return new Response("Product added to wishlist");
     }
-
-
 
     /**
      * @Route("/api/removeFromWishList", name="app_removeFromWishList", methods={"POST"})
